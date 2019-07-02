@@ -1,0 +1,54 @@
+{
+  "name": "bureaumiddelkoop",
+  "version": "0.0.1",
+  "description": "bureaumiddelkoop project",
+  "dependencies": {
+    "bem.js": "^1.0.10",
+    "d3": "^5.9.1",
+    "font-awesome": "^4.7.0",
+    "swiper": "^4.5.0",
+    "topojson": "^3.0.2"
+  },
+  "author": "Bureau Middelkoop",
+  "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/janwinsemius/bureaumiddelkoop.git"
+  },
+  "devDependencies": {
+    "autoprefixer": "^9.4.7",
+    "browser-sync": "^2.14.0",
+    "@babel/core": "^7.2.0",
+    "@babel/polyfill": "^7.0.0",
+    "@babel/preset-env": "^7.2.0",
+    "babel-loader": "^8.0.4",
+    "cssnano": "^4.1.10",
+    "eslint": "^5.13.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-node": "^8.0.1",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "gulp": "^4.0.0",
+    "gulp-imagemin": "^5.0.3",
+    "gulp-plumber": "^1.2.1",
+    "gulp-postcss": "^8.0.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^4.0.2",
+    "gulp-uglify-es": "^1.0.4",
+    "pixrem": "^5.0.0",
+    "webpack": "^4.16.2",
+    "webpack-dev-server": "^3.1.5",
+    "webpack-stream": "^5.0.0"
+  },
+  "engines": {
+    "node": ">=8"
+  },
+  "browserslist": [
+    "last 2 versions"
+  ],
+  "scripts": {
+    "dev": "gulp",
+    "build": "gulp build"
+  }
+}

@@ -1,0 +1,7 @@
+# PostgreSQL
+# ------------------------------------------------------------------------------
+POSTGRES_HOST=postgres
+POSTGRES_PORT=5433
+POSTGRES_DB=bureaumiddelkoop
+POSTGRES_USER=janwinsemius
+POSTGRES_PASSWORD=w4mtZwEaOnucXpPTIgzgY1UO6Mb7qGyTx0cEZTn2GTOFEwM94j59OAlOM8I83iz8
