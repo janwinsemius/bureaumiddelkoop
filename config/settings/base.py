@@ -15,7 +15,7 @@ DJANGO_READ_DOT_ENV_FILE=True
 READ_DOT_ENV_FILE = env.bool("DJANGO_READ_DOT_ENV_FILE", default=True)
 if READ_DOT_ENV_FILE:
     # OS environment variables take precedence over variables from .env
-    env.read_env(str(ROOT_DIR.path(".env")))
+    env.read_env(str(ROOT_DIR.path(".envs/.local/.postgres")))
 
 # GENERAL
 # ------------------------------------------------------------------------------
@@ -43,9 +43,21 @@ LOCALE_PATHS = [ROOT_DIR.path("locale")]
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
 
+# DATABASES = {
+#     "default": env.db("DATABASE_URL", default="postgres:///bureaumiddelkoop")
+# }
+
 DATABASES = {
-    "default": env.db("DATABASE_URL", default="postgres:///bureaumiddelkoop")
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': env('POSTGRES_DB'),
+        'USER': env('POSTGRES_USER'),
+        'PASSWORD':  env('POSTGRES_PASSWORD'),
+        'HOST': '',
+        'PORT': env('POSTGRES_PORT'),
+    }
 }
+
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
 
 # URLS
