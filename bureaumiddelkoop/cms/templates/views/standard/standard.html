@@ -1,0 +1,9 @@
+{% extends 'views/abstract/base.html' %}{% load cms_tags %}{% spaceless %}
+    {% block main %}
+        <article class="article article--cms">
+            <section class="article__body">
+                <h1 class="article__title">{% page_attribute "page_title" %} </h1>
+                {% placeholder 'content' %}
+        </article>
+    {% endblock %}
+{% endspaceless %}

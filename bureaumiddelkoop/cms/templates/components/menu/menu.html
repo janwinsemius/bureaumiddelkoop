@@ -1,0 +1,6 @@
+{% spaceless %}{% load i18n menu_tags %}
+    <nav class="navbar navbar-expand-md navbar-light bg-light">
+        {% comment %} <a class="menu__close toggle" data-toggle-target=".menu" data-toggle-modifier="open">{{ _('Sluiten') }}</a> {% endcomment %}
+        {% include './menu-list.html' with children=children %}
+    </nav>
+{% endspaceless %}

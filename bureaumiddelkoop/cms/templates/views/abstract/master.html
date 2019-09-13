@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+{% load i18n staticfiles cms_tags sekizai_tags %}
+
+    <html lang="nl">
+    <head>
+        <meta charset="utf-8">
+        <title>{% block title %}{% page_attribute "page_title" %} {% endblock %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="{% page_attribute 'meta_description' %}">
+        <meta name="author" content="">
+        {% block meta %}{% endblock %}
+
+        <link href="{% static 'css/screen.css' %}" media="screen" rel="stylesheet"/>
+        {% render_block "css" %}
+        {% block extra_css %}{% endblock %}
+        <link rel="shortcut icon" href="{% static 'ico/favicon.png' %}">
+    </head>
+
+    <body class="view {% block body-class %}view--{{ request.resolver_match.namespaces|join:'-' }}-{{ request.resolver_match.url_name }}{% endblock %}">
+        {% cms_toolbar %}
+        <main>
+            {% block container %}{% endblock %}
+        </main>
+
+        <script src="{% static 'js/main.js' %}"></script>
+        {% render_block "js" %}
+    </body>
+    </html>
+
+

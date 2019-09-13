@@ -1,0 +1,18 @@
+{% spaceless %}{% load menu_tags%}
+    <nav class="navbar navbar-expand-md navbar-light bg-light">
+        {% include 'components/logo/logo.html' %}
+        <div class="collapse navbar-collapse">
+            {% show_menu 0 100 100 100 'components/menu/menu.html' %}
+
+            {% comment %} {% if not request.user.is_authenticated %}
+                {% url 'auth_login' as href %}
+                {% include 'components/button/link.html' with class='button--primary' href=href label=_('Inloggen') %}
+            {% else %}
+                {% url 'auth_logout' as href %}
+                {% include 'components/button/link.html' with class='button--primary' href=href label=_('Uitloggen') %}
+            {% endif %} {% endcomment %}
+
+            {% comment %} {% include 'components/button/button.html' with class='button--secondary' toggle_target='.menu' toggle_modifier='open' label=_('Menu') %} {% endcomment %}
+        </div>
+    </nav>
+{% endspaceless %}

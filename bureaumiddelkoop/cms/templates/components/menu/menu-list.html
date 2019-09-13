@@ -1,0 +1,7 @@
+{% spaceless %}
+    <ul class="navbar-nav mr-auto">
+        {% for child in children %}
+            {% include './menu-list-item.html' with child=child request=request only %}
+        {% endfor %}
+    </ul>
+{% endspaceless %}

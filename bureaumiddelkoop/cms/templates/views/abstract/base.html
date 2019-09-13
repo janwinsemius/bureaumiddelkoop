@@ -1,0 +1,27 @@
+{% extends 'views/abstract/master.html' %}{% spaceless %}{% load cms_tags %}
+    {% block body-class %}view--cms{% endblock %}
+
+    {% block container %}
+        <header class="view__header">
+            {% block header %}
+                {% include 'components/navbar/navbar.html' with request=request only %}
+                {% include 'components/hero/hero.html' %}
+            {% endblock %}
+        </header>
+
+        {% block main_outer %}
+        <section class="view__section">
+            <div class="view__main">
+                {% block main %}
+                {% endblock %}
+            </div>
+        </section>
+        {% endblock %}
+
+        <footer class="view__footer">
+            <div class="footer">
+                {% static_placeholder 'footer' %}
+            </div>
+        </footer>
+    {% endblock %}
+{% endspaceless %}

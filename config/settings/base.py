@@ -4,6 +4,8 @@ Base settings to build other settings files upon.
 
 import environ
 
+from .cms import *
+
 ROOT_DIR = (
     environ.Path(__file__) - 3
 )  # (bureaumiddelkoop/config/settings/base.py - 3 = bureaumiddelkoop/)
@@ -26,8 +28,6 @@ DEBUG = env.bool("DJANGO_DEBUG", False)
 # though not all of them may be available with every OS.
 # In Windows, this must be set to your system time zone.
 TIME_ZONE = "Europe/Amsterdam"
-# https://docs.djangoproject.com/en/dev/ref/settings/#language-code
-LANGUAGE_CODE = "en-us"
 # https://docs.djangoproject.com/en/dev/ref/settings/#site-id
 SITE_ID = 1
 # https://docs.djangoproject.com/en/dev/ref/settings/#use-i18n
@@ -77,22 +77,35 @@ DJANGO_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # "django.contrib.humanize", # Handy template tags
+    "djangocms_admin_style",
     "django.contrib.admin",
 ]
+
+
+
 THIRD_PARTY_APPS = [
     "crispy_forms",
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
     "rest_framework",
+    'corsheaders',
 ]
 
 LOCAL_APPS = [
     "bureaumiddelkoop.users.apps.UsersConfig",
     # Your stuff: custom apps go here
 ]
+
+CMS_APPS = [
+    "cms",
+    "menus",
+    "treebeard",
+    "sekizai",
+]
+
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
-INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
+INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS + CMS_APPS
 
 # MIGRATIONS
 # ------------------------------------------------------------------------------
@@ -137,14 +150,20 @@ AUTH_PASSWORD_VALIDATORS = [
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#middleware
 MIDDLEWARE = [
+    "cms.middleware.utils.ApphookReloadMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.locale.LocaleMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "cms.middleware.user.CurrentUserMiddleware",
+    "cms.middleware.page.CurrentPageMiddleware",
+    "cms.middleware.toolbar.ToolbarMiddleware",
+    "cms.middleware.language.LanguageCookieMiddleware",
 ]
 
 # STATIC
@@ -176,7 +195,10 @@ TEMPLATES = [
         # https://docs.djangoproject.com/en/dev/ref/settings/#std:setting-TEMPLATES-BACKEND
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         # https://docs.djangoproject.com/en/dev/ref/settings/#template-dirs
-        "DIRS": [str(APPS_DIR.path("templates"))],
+        "DIRS": [
+            str(APPS_DIR.path("templates")),
+            str(APPS_DIR.path("cms/templates")),
+            ],
         "OPTIONS": {
             # https://docs.djangoproject.com/en/dev/ref/settings/#template-loaders
             # https://docs.djangoproject.com/en/dev/ref/templates/api/#loader-types
@@ -194,10 +216,14 @@ TEMPLATES = [
                 "django.template.context_processors.static",
                 "django.template.context_processors.tz",
                 "django.contrib.messages.context_processors.messages",
+                "sekizai.context_processors.sekizai",
+                "cms.context_processors.cms_settings",
             ],
         },
     }
 ]
+
+
 # http://django-crispy-forms.readthedocs.io/en/latest/install.html#template-packs
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 
@@ -215,7 +241,7 @@ CSRF_COOKIE_HTTPONLY = True
 # https://docs.djangoproject.com/en/dev/ref/settings/#secure-browser-xss-filter
 SECURE_BROWSER_XSS_FILTER = True
 # https://docs.djangoproject.com/en/dev/ref/settings/#x-frame-options
-X_FRAME_OPTIONS = "DENY"
+X_FRAME_OPTIONS = "SAMEORIGIN"
 
 # EMAIL
 # ------------------------------------------------------------------------------
@@ -274,4 +300,8 @@ SOCIALACCOUNT_ADAPTER = "bureaumiddelkoop.users.adapters.SocialAccountAdapter"
 
 
 # Your stuff...
+CORS_ORIGIN_WHITELIST = (
+    'http://127.0.0.1:8000',
+)
+
 # ------------------------------------------------------------------------------

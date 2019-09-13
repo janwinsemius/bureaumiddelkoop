@@ -27,7 +27,7 @@ function pathsConfig(appName) {
   const vendorsRoot = 'node_modules'
 
   return {
-    
+
     app: this.app,
     templates: `${this.app}/templates`,
     css: `${this.app}/static/css`,
@@ -58,7 +58,7 @@ function styles() {
   return src(`${paths.sass}/project.scss`)
     .pipe(sass({
       includePaths: [
-        
+
         paths.sass
       ]
     }).on('error', sass.logError))
@@ -90,7 +90,7 @@ function imgCompression() {
 
 // Run django server
 function runServer(cb) {
-  var cmd = spawn('python', ['manage.py', 'runserver'], {stdio: 'inherit'})
+  var cmd = spawn('python', ['/manage.py', 'runserver'], {stdio: 'inherit'})
   cmd.on('close', function(code) {
     console.log('runServer exited with code ' + code)
     cb(code)
@@ -107,7 +107,7 @@ function initBrowserSync() {
       ], {
         // https://www.browsersync.io/docs/options/#option-proxy
         proxy: 'localhost:8000'
-        
+
       }
     )
 }
@@ -123,7 +123,7 @@ function watchPaths() {
 const generateAssets = parallel(
   styles,
   scripts,
-  
+
   imgCompression
 )
 

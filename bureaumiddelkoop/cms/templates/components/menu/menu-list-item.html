@@ -1,0 +1,10 @@
+{% spaceless %}
+    <li class="nav-item{% if child.children %} menu__list-item--ancestor{% endif %}{% if child.selected or child.ancestor %} menu__list-item--active{% endif %}" id="menu-item-{{ child.id }}">
+        <a class="nav-link{% if child.children %} {% endif %}" href="{{ child.get_absolute_url }}">{{ child.title }}</a>
+
+        {% if child.children %}
+            <span class="toggle" href="{{ child.get_absolute_url }}" data-toggle-target=".navbar__body > .menu, #menu-item-{{ child.id }}" data-toggle-modifier="expand"></span>
+            {% include './menu-list.html' with children=child.children request=request only %}
+        {% endif %}
+    </li>
+{% endspaceless %}

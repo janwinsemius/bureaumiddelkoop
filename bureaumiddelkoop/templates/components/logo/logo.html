@@ -1,0 +1,6 @@
+{% load i18n static %}{% spaceless %}
+    <a class="logo{% if class %} {{ class }}{% endif %}" href="/">
+        {% static 'image/bureaumiddelkoop.png' as src %}
+        {% include 'components/image/image.html' with alt=_('Bureau Middelkoop') src=src only %}
+    </a>
+{% endspaceless %}
