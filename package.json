@@ -7,7 +7,7 @@
     "d3": "^5.9.1",
     "font-awesome": "^4.7.0",
     "leaflet": "^1.5.1",
-    "swiper": "^4.5.0",
+    "swiper": "^6.5.1",
     "topojson": "^3.0.2"
   },
   "author": "Bureau Middelkoop",
